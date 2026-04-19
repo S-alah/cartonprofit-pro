@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>S.KATTABI Production System</title>
+<!-- ربط ملف الإعدادات -->
+<link rel="manifest" href="manifest.json">
+
+<!-- تحديد لون الشريط العلوي للمتصفح في الموبايل -->
+<meta name="theme-color" content="#1e293b">
+
+<!-- تعريف أيقونة التطبيق لأجهزة الأيفون -->
+<link rel="apple-touch-icon" href="icon.png">
+
+    <style>
+        :root {
+            /* هوية بصرية مستوحاة من صناعة الكرتون والأرباح */
+            --kraft-brown: #8B5A2B;
+            --light-cream: #FDFBF7;
+            --card-border: #EEDCC6;
+            --emerald-money: #1B5E20;
+            --warning-red: #B71C1C;
+            --text-main: #3E2723;
+            --text-light: #795548;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #F4EBE1;
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* --- شاشة الدخول الاحترافية --- */
+        #login-page {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #8B5A2B 0%, #5C3A21 100%);
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        .login-box {
+            background: #FFF;
+            padding: 30px 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+        }
+
+        .login-box h2 { font-weight: 800; color: #5C3A21; margin-bottom: 25px; font-size: 20px; }
+
+        .input-group { position: relative; margin-bottom: 15px; }
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 2px solid #E0E0E0;
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s ease;
+        }
+        .input-group input:focus { border-color: var(--kraft-brown); }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: var(--kraft-brown);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(139, 90, 43, 0.3);
+            transition: 0.3s ease;
+        }
+        .btn-login:hover { background: #5C3A21; }
+
+        /* --- الواجهة الرئيسية للـ Dashboard --- */
+        #calc-content {
+            display: none;
+            width: 100%;
+            max-width: 480px; /* مقاس مثالي جداً لشاشات الجوال */
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        .dashboard-header {
+            background: #FFF;
+            border: 1px solid var(--card-border);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .dashboard-header {
+    text-align: center;
+    padding: 30px 10px 10px;
+    background: transparent; /* شيلنا الألوان الزحمة */
+}
+
+.dashboard-header {
+    background: #1a1a1a; /* أسود فخم */
+    background-image: url(); /* نقشة كاربون فايبر خفيفة */
+    position: relative;
+    padding: 40px 20px;
+    border-radius: 0 0 40px 40px;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    border-bottom: 3px solid #8B5A2B; /* خط نحاسي رفيع */
+}
+
+/* إضاءة خفيفة في الخلفية */
+.header-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(139, 90, 43, 0.2) 0%, transparent 70%);
+}
+
+.factory-icon { font-size: 35px; margin-bottom: 10px; filter: drop-shadow(0 0 10px #8B5A2B); }
+
+.dashboard-header h1 {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin: 0;
+    color: #f1f1f1;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.dashboard-header {
+    background: #ffffff; /* أبيض صريح */
+    padding: 35px 20px 20px;
+    text-align: center;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* ظل خفيف جداً */
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.brand-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.logo-box {
+    font-size: 28px;
+    background: #fdf7f2; /* كريمي خفيف جداً */
+    padding: 8px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.dashboard-header h1 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #2d2d2d;
+    margin: 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.dashboard-header {
+    background: #ffffff;
+    padding: 40px 20px 25px;
+    text-align: center;
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    position: relative;
+    border-bottom: 4px solid #8b5a2b; /* خط بني نحاسي يمثل جودة الكرتون */
+}
+
+.factory-badge {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fdf2e9;
+    color: #8b5a2b;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    border: 1px solid #eee;
+}
+
+.main-title h1 {
+    font-size: 28px;
+    font-weight: 900;
+    color: #2c3e50;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.main-title .divider {
+    width: 30px;
+    height: 3px;
+    background: #8b5a2b;
+    margin: 12px auto;
+    border-radius: 2px;
+}
+
+.main-title p {
+    font-size: 12px;
+    color: #95a5a6;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.s-item {
+    background: #fafafa;
+    padding: 8px 15px;
+    border-radius: 12px;
+    font-size: 12px;
+    border: 1px solid #f0f0f0;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.s-item span {
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.time-footer {
+    margin-top: 25px;
+    font-size: 11px;
+    color: #bdc3c7;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+
+        .section-title {
+            font-weight: bold;
+            font-size: 13px;
+            color: var(--text-light);
+            margin: 15px 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 1px solid #F4EBE1;
+            padding-bottom: 5px;
+        }
+
+        .floating-input {
+            background: #FAFAFA;
+            border: 1px solid #E0E0E0;
+            padding: 12px;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            transition: 0.2s ease;
+        }
+        .floating-input:focus {
+            background: #FFF;
+            border-color: var(--kraft-brown);
+            outline: none;
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+        .btn-action {
+            padding: 14px;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            transition: 0.2s ease;
+        }
+
+        .btn-calc { background: var(--emerald-money); color: white; box-shadow: 0 4px 10px rgba(27, 94, 32, 0.2); }
+        .btn-calc:hover { background: #134414; }
+
+        .btn-print { background: #FAFAFA; border: 1px solid #E0E0E0; color: #5C3A21; }
+        .btn-print:hover { background: #F4EBE1; }
+
+        /* عرض النتائج بتصميم مالي بارز للموبايل */
+        .results-hub {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .res-bubble {
+            background: var(--light-cream);
+            padding: 15px 10px;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            text-align: center;
+            transition: 0.2s ease;
+        }
+
+        .res-label { font-size: 10px; color: var(--text-light); display: block; margin-bottom: 6px; font-weight: bold;}
+        .res-value { font-size: 15px; font-weight: 800; color: var(--text-main); }
+        .res-value span { font-size: 10px; color: var(--text-light); margin-right: 2px; }
+
+        /* كروت المكسب والتوفير مخصصة بالأخضر */
+        .money-card {
+            background: #E8F5E9;
+            border-color: #C8E6C9;
+        }
+        .money-card .res-value { color: var(--emerald-money); }
+
+        /* كروت الهالك والخسائر مخصصة بالأحمر */
+        .loss-card {
+            background: #FFEBEE;
+            border-color: #FFCDD2;
+        }
+        .loss-card .res-value { color: var(--warning-red); }
+
+        .total-banner {
+            grid-column: span 2;
+            background: #EFEBE9;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px dashed var(--kraft-brown);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 10px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+/* 🔥 Splash Screen */
+#splash {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.splash-content {
+    text-align: center;
+    animation: fadeIn 1.5s ease;
+}
+
+.logo {
+    font-size: 50px;
+    margin-bottom: 10px;
+    animation: pop 1s ease;
+}
+
+.splash-content h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.splash-content p {
+    font-size: 14px;
+    opacity: 0.8;
+    margin: 5px 0 20px;
+}
+
+.loader-bar {
+    width: 200px;
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.loader-fill {
+    width: 0%;
+    height: 100%;
+    background: #22c55e;
+    animation: load 3s linear forwards;
+}
+
+@keyframes load {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+
+    </style>
+</head>
+<body>
+<!-- 🔥 Splash Loading Screen -->
+<div id="splash">
+    <div class="splash-content">
+        <div class="logo">📦</div>
+        <h1>CartonProfit Pro by Salah </h1>
+        <p>Reduce Waste. Increase Profit 💰 " « اِكشف الهالك المستخبي.. ووفّر فلوسك الضايعة » "</p>
+        <p> ❤ أهلا بك مع شركة سيلي باك .. يرجى الإنتظار ❤ </p>
+        <div class="loader-bar">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+</div>
+    <!-- شاشة الدخول المبتكرة -->
+    <div id="login-page">
+        <div class="login-box">
+            <div style="font-size: 40px; margin-bottom: 10px;">📦</div>
+            <h2>نظام التحكم في أرباح الكرتون</h2>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="اسم المستخدم">
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="كلمة المرور">
+            </div>
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px; color: #5C3A21; justify-content: center;">
+    <input type="checkbox" id="rememberMe" style="width: 18px; height: 18px;">
+    <label for="rememberMe" style="font-size: 14px;">تذكرني على هذا الجهاز</label>
+</div>
+
+            <button class="btn-login" onclick="checkLogin()">دخول لوحة التحكم</button>
+            <p id="err" style="color:var(--warning-red); display:none; font-size:11px; margin-top:8px;">عفواً، البيانات غير صحيحة!</p>
+        </div>
+    </div>
+
+    <!-- الواجهة الرئيسية -->
+    <div id="calc-content">
+        <div class="dashboard-header">
+    <div class="dashboard-header">
+    <div class="factory-badge">CartonProfit Pro</div>
+
+    <div class="main-title">
+        <h1>كاشف الهالك.. وحاصد الأرباح</h1>
+ <div class="factory-badge"></div>
+        <p>« عينك على الهالك.. وقرارك في المكسب »</p>
+    </div>
+    <div class="stats-row">
+        <div class="s-item"><span>كفاءة التشغيل</span> 🏭</div>
+        <div class="s-item"><span>العائد المالي </span> 💰</div>
+        <div class="s-item"><span>الرقابة الفنية</span> 🎯</div>
+    </div>
+    <div id="dt" class="time-footer"></div>
+</div>
+
+        <div class="main-card">
+            <div class="section-title">📦 أبعاد الفرخ والكمية</div>
+
+                <input type="number" id="L" class="floating-input" placeholder="الطول (سم)">
+                <input type="number" id="W" class="floating-input" placeholder="العرض (سم)">
+            </div>
+            <input type="number" id="Q" class="floating-input" placeholder="الكمية المطلوبة (فرخ)">
+
+            <div class="section-title">📄 مواصفات الورق والتضليع</div>
+            <div class="grid-2"> 
+                <input type="number" id="FG" class="floating-input" placeholder="جرام السنة">
+                <select id="F" class="floating-input">
+                    <option value="1" selected>لاينر  (1.0)</option>
+                    <option value="1.25">كرتون مضلع - فلوت E (1.25)</option>
+                    <option value="1.35">كرتون مضلع - فلوت B (1.35)</option>
+                    <option value="1.45">كرتون مضلع - فلوت C (1.45)</option>
+                </select>
+            </div>
+            <input type="number" id="LG" class="floating-input" placeholder="جرام اللاينر">
+
+            <div class="section-title">🔄 بيانات التريم وعدد الأوت</div>
+            <div class="grid-2"
+</div>
+                <input type="number" id="MR" class="floating-input" placeholder="بكر أساسي (سم)">
+                <input type="number" id="AR" class="floating-input" placeholder="بكر فعلي (سم)">
+            </div>
+            <input type="number" id="OUTS" class="floating-input" placeholder="عدد الأوت">
+
+            <div class="section-title">💰 البيانات المالية</div>
+            <input type="number" id="PRICE" class="floating-input" placeholder="سعر طن الكرتون (بالجنيه)">
+
+            <button class="btn-action btn-calc" onclick="runCalc()">حساب التكاليف والأرباح ⚡</button>
+            <button class="btn-action btn-print" onclick="smartPrint()">طباعة النتائج فقط 🖨️</button>
+            <!-- زرار مسح البيانات الجديد -->
+            <button class="btn-action" style="background: #ececec; color: #333;" onclick="resetData()">مسح البيانات 🗑️</button>
+
+            <!-- النتائج المبتكرة الموجهة ماليًا -->
+            <div class="results-hub">
+                
+                <!-- البيانات التشغيلية -->
+                <div class="res-bubble">
+                    <span class="res-label">الوزن الصافي للطلب</span>
+                    <div class="res-value" id="r1">0.00 <span>طن</span></div>
+                </div>
+                <div class="res-bubble">
+                    <span class="res-label">عرض التريم (الفاقد)</span>
+                    <div class="res-value" id="r2">0.00 <span>سم</span></div>
+                </div>
+                <div class="res-bubble loss-card">
+                    <span class="res-label">نسبة هالك التريم</span>
+                    <div class="res-value" id="r3">0.00 <span>%</span></div>
+                </div>
+                <div class="res-bubble loss-card">
+                    <span class="res-label">وزن هالك التريم</span>
+                    <div class="res-value" id="r_trim">0.00 <span>كجم</span></div>
+                </div>
+                <div class="res-bubble">
+                    <span class="res-label">عدد القطعيات</span>
+                    <div class="res-value" id="r_cuts">0 <span>قطعية</span></div>
+                </div>
+                <div class="res-bubble">
+                    <span class="res-label">الطول المتري الكلي</span>
+                    <div class="res-value" id="r_ml">0.00 <span>متر</span></div>
+                </div>
+                <div class="res-bubble">
+                    <span class="res-label">إجمالي مساحة الخام</span>
+                    <div class="res-value" id="r_sqm">0.00 <span>م²</span></div>
+                </div>
+                <div class="res-bubble">
+                    <span class="res-label">وزن الفرخ الواحد</span>
+                    <div class="res-value" id="r_sw">0.00 <span>جم</span></div>
+                </div>
+
+                <!-- البيانات المالية لجلب المال -->
+                <div class="res-bubble money-card" style="grid-column: span 1;">
+                    <span class="res-label">تكلفة الخام الإجمالية</span>
+                    <div class="res-value" id="cost_total">0.00 <span>جنيه</span></div>
+                </div>
+                <div class="res-bubble loss-card" style="grid-column: span 1;">
+                    <span class="res-label">فاتورة خسائر التريم</span>
+                    <div class="res-value" id="cost_waste">0.00 <span>جنيه</span></div>
+                </div>
+                
+                <!-- هذا الكارت يحث على زيادة الربحية -->
+                <div class="res-bubble money-card" style="grid-column: span 2; border: 1px dashed var(--emerald-money);">
+                    <span class="res-label">عائد الأرباح عند خفض الهالك 1%</span>
+                    <div class="res-value" id="saving_1">0.00 <span>جنيه</span></div>
+                </div>
+
+                <!-- الإجمالي النهائي -->
+                <div class="total-banner">
+                    <span class="res-label">الوزن المطلوب سحبه من المخزن</span>
+                    <div class="res-value" id="r4" style="font-size:20px; color:#5C3A21;">0.00 <span>طن</span></div>
+                </div>
+            </div>
+<div class="admin-strategic-panel" style="margin: 30px 15px; padding: 20px; background: #f8fafc; border-radius: 12px; border-left: 4px solid #1b5e20; text-align: right; direction: rtl; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+    
+    <div style="font-size: 13px; color: #1e293b; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 18px;">📊</span> تحليل الاستدامة المالية والإنتاجية
+    </div>
+
+   <div style="margin: 30px 15px; padding: 15px; background: #fdfaf7; border-right: 4px solid #1b5e20; text-align: right; direction: rtl;">
+    <p style="font-size: 13px; color: #3e2723; margin: 0; line-height: 1.6; font-weight: 700;">
+        📌 <span style="color: #1b5e20;">رؤية النظام:</span> 
+        هذا النظام يحول "هالك التريم" من مجرد ورق ضائع إلى <span style="color: #1b5e20;">أرقام مالية دقيقة</span>؛ لنساعدك على كشف الخسائر المستخفية وتحويلها إلى <span style="color: #1b5e20;">أرباح صافية</span>.
+    </p>
+    <div style="font-size: 11px; color: #8b5a2b; margin-top: 8px; font-weight: 600; font-style: italic;">
+        * دقة الحسابات تضمن لك مطابقة جرد المخزن مع الإنتاج الفعلي بنسبة 100%.
+    </div>
+</div>
+
+<!-- هنا بقى بيبدأ اسمك القديم اللي في الكود -->
+<div class="footer"> 
+            <div class="footer">
+                Developed by <b>Eng Salah Khattabi<br>
+                <span> 01100404303</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+    <script>
+      function checkLogin() {
+    const u = document.getElementById('username').value;
+    const p = document.getElementById('password').value;
+    const remember = document.getElementById('rememberMe').checked;
+
+    if(u === "s" && p === "123") {
+        if(remember) {
+            localStorage.setItem('user', u);
+            localStorage.setItem('pass', p);
+        } else {
+            localStorage.removeItem('user');
+            localStorage.removeItem('pass');
+        }
+        document.getElementById('login-page').style.display = 'none';
+        document.getElementById('calc-content').style.display = 'block';
+        updateTime();
+    } else {
+        document.getElementById('err').style.display = 'block';
+    }
+}
+
+
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('dt').innerText = now.toLocaleDateString('ar-EG') + " | " + now.toLocaleTimeString('ar-EG');
+        }
+
+        function runCalc() {
+            const l = parseFloat(document.getElementById('L').value)/100 || 0;
+            const w = parseFloat(document.getElementById('W').value)/100 || 0;
+            const q = parseFloat(document.getElementById('Q').value) || 0;
+            const fg = parseFloat(document.getElementById('FG').value) || 0;
+            const f = parseFloat(document.getElementById('F').value);
+            const lg = parseFloat(document.getElementById('LG').value) || 0;
+            const mr = parseFloat(document.getElementById('MR').value) || 0;
+            const ar = parseFloat(document.getElementById('AR').value) || 0;
+            const outs = parseFloat(document.getElementById('OUTS').value) || 1;
+            const priceTon = parseFloat(document.getElementById('PRICE').value) || 0;
+
+            if (l && w && q) {
+                const net = ((l * w * q) * ((fg * f) + lg)) / 1000;
+                const tw = ar - mr;
+                const tp = (tw / ar) * 100;
+                const total = net * (1 + (tp / 100));
+                const trW = total - net;
+
+                const cuts = q / outs;
+                const meterLine = cuts * l;
+                const sqm = meterLine * (ar / 100);
+                const singleSheetWeight = ((fg * f) + lg) * l * w / 1000;
+
+                const priceKg = priceTon / 1000;
+                const costTotal = total * priceKg;
+                const costWaste = trW * priceKg;
+                const saving1Percent = (total * 0.01) * priceKg;
+
+                document.getElementById('r1').innerHTML = net.toFixed(2) + " <span>كجم</span>";
+                document.getElementById('r2').innerHTML = tw.toFixed(2) + " <span>سم</span>";
+                document.getElementById('r3').innerHTML = tp.toFixed(2) + " <span>%</span>";
+                document.getElementById('r_trim').innerHTML = trW.toFixed(2) + " <span>كجم</span>";
+                document.getElementById('r4').innerHTML = total.toFixed(2) + " <span>كجم</span>";
+
+                document.getElementById('r_cuts').innerHTML = cuts.toFixed(0) + " <span>قطعية</span>";
+                document.getElementById('r_ml').innerHTML = meterLine.toFixed(2) + " <span>متر</span>";
+                document.getElementById('r_sqm').innerHTML = sqm.toFixed(2) + " <span>م²</span>";
+                document.getElementById('r_sw').innerHTML = singleSheetWeight.toFixed(4) + " <span>كجم</span>";
+
+                document.getElementById('cost_total').innerHTML = costTotal.toFixed(2) + " <span>جنيه</span>";
+                document.getElementById('cost_waste').innerHTML = costWaste.toFixed(2) + " <span>جنيه</span>";
+                document.getElementById('saving_1').innerHTML = saving1Percent.toFixed(2) + " <span>جنيه</span>";
+            }
+        }
+// 🔥 Splash Screen Timer
+window.addEventListener("load", function() {
+    setTimeout(() => {
+        document.getElementById("splash").style.display = "none";
+    }, 3000);
+});
+function resetData() {
+    // التأكد من المستخدم قبل المسح
+    if (confirm("هل تريد مسح جميع البيانات والبدء من جديد؟")) {
+        // مسح كل المدخلات (Inputs)
+        const inputs = document.querySelectorAll('.floating-input');
+        inputs.forEach(input => input.value = "");
+
+        // تصفير كل النتائج (Results)
+        const results = ['r1', 'r2', 'r3', 'r_trim', 'r4', 'r_cuts', 'r_ml', 'r_sqm', 'r_sw', 'cost_total', 'cost_waste', 'saving_1'];
+        results.forEach(id => {
+            document.getElementById(id).innerHTML = "0.00";
+        });
+        
+        // إعادة وضع "قطعية" و "كجم" للجماليات
+        document.getElementById('r_cuts').innerHTML = "0 <span>قطعية</span>";
+        document.getElementById('r4').innerHTML = "0.00 <span>كجم</span>";
+        
+        alert("تم مسح البيانات بنجاح ✅");
+    }
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+    const savedU = localStorage.getItem('user');
+    const savedP = localStorage.getItem('pass');
+    if (savedU && savedP) {
+        document.getElementById('username').value = savedU;
+        document.getElementById('password').value = savedP;
+        document.getElementById('rememberMe').checked = true;
+    }
+});
+
+
+
+
+function smartPrint() {
+    // 1. جلب محتوى النتائج فقط
+    const resultsHtml = document.querySelector('.results-hub').innerHTML;
+    const reportTitle = "تقرير بيانات الإنتاج والتحليل المالي - م/ صلاح خطابي";
+    
+    // 2. فتح نافذة طباعة جديدة
+    const printWindow = window.open('', '', 'height=600,width=800');
+    
+    // 3. بناء هيكل الصفحة للطباعة فقط
+    printWindow.document.write('<html><head><title>تقرير إنتاج</title>');
+    printWindow.document.write('<style>');
+    printWindow.document.write(`
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; direction: rtl; padding: 20px; }
+        h1 { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; font-size: 18px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .res-bubble { display: table-row; }
+        .res-label, .res-value { display: table-cell; padding: 10px; border-bottom: 1px solid #ddd; text-align: right; font-size: 14px; }
+        .res-label { font-weight: bold; background-color: #f9f9f9; width: 50%; }
+        span { font-size: 10px; color: #666; margin-right: 5px; }
+        /* إخفاء أي عناصر غير النتائج لو تسللت */
+        script { display: none; }
+    `);
+    printWindow.document.write('</style></head><body>');
+    printWindow.document.write('<h1>' + reportTitle + '</h1>');
+    printWindow.document.write('<table>' + resultsHtml + '</table>');
+    printWindow.document.write('</body></html>');
+    
+    // 4. تنفيذ أمر الطباعة
+    printWindow.document.close();
+    printWindow.focus();
+    setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+    }, 500);
+}
+
+
+
+    </script>
+  // التأكد إن المتصفح يدعم خاصية السيرفس وركر
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('التطبيق جاهز للعمل بدون إنترنت!', reg))
+        .catch(err => console.log('فشل تسجيل السيرفس وركر', err));
+    });
+  }
+</script>
+
+</body>
+</html>
